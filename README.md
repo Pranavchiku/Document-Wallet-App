@@ -46,3 +46,8 @@ Step 5:
 ```
 flutter upgrade
 ```
+<p float="left">
+<img src = "https://github.com/Pranavchiku/Document-Wallet-App/blob/main/app%20images/1.jpg" width="200" height="444">
+<img src = "https://github.com/Pranavchiku/Document-Wallet-App/blob/main/app%20images/2.jpg" width="200" height="444">
+<img src = "https://github.com/Pranavchiku/Document-Wallet-App/blob/main/app%20images/3.jpg" width="200" height="444">
+</p>
