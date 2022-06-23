@@ -1,8 +1,8 @@
 import 'dart:io';
 import 'dart:typed_data';
 
-import 'package:document_wallet/firebaseapi.dart';
 import 'package:document_wallet/index.dart';
+import 'package:document_wallet/widgets/bottomNavBar.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_feather_icons/flutter_feather_icons.dart';
@@ -211,6 +211,7 @@ class _AddFileState extends State<AddFile> {
           ),
         ),
       ),
+      bottomNavigationBar: bottomNavBar(),
     );
   }
 }

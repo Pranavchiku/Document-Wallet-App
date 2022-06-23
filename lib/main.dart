@@ -47,8 +47,8 @@ class _LandingPageState extends State<LandingPage> {
       setState(() {
         this.user = firebaseUser!;
         this.isloggedin = true;
-        Navigator.push(
-            context, MaterialPageRoute(builder: (context) => Index()));
+        Navigator.pushAndRemoveUntil(context,
+            MaterialPageRoute(builder: (context) => Index()), (route) => false);
       });
     }
   }
@@ -68,8 +68,9 @@ class _LandingPageState extends State<LandingPage> {
         final UserCredential user =
             await _auth.signInWithCredential(credential);
 
-        await Navigator.push(
-            context, MaterialPageRoute(builder: (context) => Index()));
+        await Navigator.pushAndRemoveUntil(context,
+            MaterialPageRoute(builder: (context) => Index()), (route) => false);
+
         return user;
       } else {
         throw StateError('Missing Google Auth Token');
@@ -86,8 +87,8 @@ class _LandingPageState extends State<LandingPage> {
       try {
         await _auth.signInWithEmailAndPassword(
             email: _email!, password: _password!);
-        Navigator.push(
-            context, MaterialPageRoute(builder: (context) => Index()));
+        Navigator.pushAndRemoveUntil(context,
+            MaterialPageRoute(builder: (context) => Index()), (route) => false);
       } catch (e) {
         showError("Error here");
       }
@@ -302,25 +303,6 @@ class _LandingPageState extends State<LandingPage> {
                     ),
                   ),
                   SizedBox(width: 20),
-                  Container(
-                    width: 50,
-                    height: 50,
-                    decoration: BoxDecoration(
-                      boxShadow: [
-                        BoxShadow(
-                          blurRadius: 20,
-                          color: Color.fromRGBO(0, 0, 0, 0.1),
-                        )
-                      ],
-                      color: Colors.white,
-                      borderRadius: BorderRadius.circular(10),
-                    ),
-                    child: Icon(
-                      Icons.facebook,
-                      color: Colors.blue,
-                    ),
-                  ),
-                  SizedBox(width: 20),
                   GestureDetector(
                     onTap: googleSignIn,
                     child: Container(
@@ -345,6 +327,25 @@ class _LandingPageState extends State<LandingPage> {
                         height: 10,
                         width: 10,
                       ),
+                    ),
+                  ),
+                  SizedBox(width: 20),
+                  Container(
+                    width: 50,
+                    height: 50,
+                    decoration: BoxDecoration(
+                      boxShadow: [
+                        BoxShadow(
+                          blurRadius: 20,
+                          color: Color.fromRGBO(0, 0, 0, 0.1),
+                        )
+                      ],
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    child: Icon(
+                      Icons.facebook,
+                      color: Colors.blue,
                     ),
                   ),
                 ],

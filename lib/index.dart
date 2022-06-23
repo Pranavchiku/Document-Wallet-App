@@ -1,7 +1,10 @@
+import 'dart:async';
 import 'dart:typed_data';
 import 'dart:convert';
 import 'package:document_wallet/addFile.dart';
+import 'package:document_wallet/main.dart';
 import 'package:document_wallet/viewDocument.dart';
+import 'package:document_wallet/widgets/bottomNavBar.dart';
 import 'package:document_wallet/widgets/documentCard.dart';
 import 'package:document_wallet/widgets/profileCard.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -16,10 +19,26 @@ class Index extends StatefulWidget {
   State<Index> createState() => _IndexState();
 }
 
+class Debouncer {
+  final int milliseconds;
+  VoidCallback? action;
+  Timer? _timer;
+
+  Debouncer({required this.milliseconds});
+
+  run(VoidCallback action) {
+    if (null != _timer) {
+      _timer!.cancel();
+    }
+    _timer = Timer(Duration(milliseconds: milliseconds), action);
+  }
+}
+
 class _IndexState extends State<Index> {
   final FirebaseAuth _auth = FirebaseAuth.instance;
-
+  final _debouncer = Debouncer(milliseconds: 100);
   List<String>? nameOfDocuments = [];
+  List<String>? nameOfDocuments2 = [];
   int i = 0;
   getCountOfDocs() async {
     var data = await FirebaseStorage.instance
@@ -31,6 +50,7 @@ class _IndexState extends State<Index> {
         setState(() {
           i = i + 1;
           nameOfDocuments!.insert(0, element.name);
+          nameOfDocuments2!.insert(0, element.name);
         }),
       },
     );
@@ -44,25 +64,6 @@ class _IndexState extends State<Index> {
   Widget build(BuildContext context) {
     final Size size = MediaQuery.of(context).size;
     return Scaffold(
-      floatingActionButton: Container(
-        child: Align(
-          alignment: Alignment.bottomRight,
-          child: FloatingActionButton(
-            backgroundColor: Colors.indigo,
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.all(Radius.circular(20.0)),
-            ),
-            onPressed: () {
-              Navigator.push(
-                  context, MaterialPageRoute(builder: (context) => AddFile()));
-            },
-            child: Icon(
-              Icons.add,
-              color: Colors.white,
-            ),
-          ),
-        ),
-      ),
       body: SingleChildScrollView(
         child: Container(
           padding: EdgeInsets.only(
@@ -104,6 +105,20 @@ class _IndexState extends State<Index> {
                   ],
                 ),
                 child: TextFormField(
+                  onChanged: (string) {
+                    _debouncer.run(() {
+                      setState(() {
+                        nameOfDocuments = nameOfDocuments2!
+                            .where((element) => element.contains(string))
+                            .toList();
+                      });
+                    });
+                    if (string.length == 0) {
+                      nameOfDocuments = nameOfDocuments2!
+                          .where((element) => element.contains(""))
+                          .toList();
+                    }
+                  },
                   obscureText: false,
                   validator: (input) {
                     if (input != null && input.isEmpty) {
@@ -126,45 +141,51 @@ class _IndexState extends State<Index> {
               SizedBox(height: 20),
 
               //search bar remaining
-              for (var a = 0; a < i; a++)
-                GestureDetector(
-                  onTap: () async {
-                    FirebaseStorage storage = FirebaseStorage.instance;
-                    Reference ref = storage.ref().child(
-                        "${_auth.currentUser!.displayName}/${nameOfDocuments![a]}");
-                    final String fileUrl = await ref.getDownloadURL();
-                    final String path = await ref.fullPath;
+              if (nameOfDocuments!.length > 0)
+                for (var a = 0; a < nameOfDocuments!.length; a++)
+                  GestureDetector(
+                    onTap: () async {
+                      FirebaseStorage storage = FirebaseStorage.instance;
+                      Reference ref = storage.ref().child(
+                          "${_auth.currentUser!.displayName}/${nameOfDocuments![a]}");
+                      final String fileUrl = await ref.getDownloadURL();
+                      final String path = await ref.fullPath;
 
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => viewDocument(
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => viewDocument(
+                            documentName: nameOfDocuments![a],
+                            documentUrl: fileUrl,
+                          ),
+                        ),
+                      );
+                    },
+                    child: Column(
+                      children: [
+                        documentCard(
                           documentName: nameOfDocuments![a],
-                          documentUrl: fileUrl,
+                          ref: FirebaseStorage.instance.ref().child(
+                              "${_auth.currentUser!.displayName}/${nameOfDocuments![a]}"),
+                          icon: Icon(
+                            FeatherIcons.file,
+                          ),
                         ),
-                      ),
-                    );
-                  },
-                  child: Column(
-                    children: [
-                      documentCard(
-                        documentName: nameOfDocuments![a],
-                        ref: FirebaseStorage.instance.ref().child(
-                            "${_auth.currentUser!.displayName}/${nameOfDocuments![a]}"),
-                        icon: Icon(
-                          FeatherIcons.file,
+                        SizedBox(
+                          height: 20,
                         ),
-                      ),
-                      SizedBox(
-                        height: 20,
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
+              if (nameOfDocuments!.length == 0)
+                Text(
+                  "No documents found",
                 ),
             ],
           ),
         ),
       ),
+      bottomNavigationBar: bottomNavBar(),
     );
   }
 }

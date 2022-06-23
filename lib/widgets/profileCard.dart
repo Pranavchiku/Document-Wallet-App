@@ -63,12 +63,15 @@ class _profileCardState extends State<profileCard> {
             ),
             SizedBox(height: 20),
             Center(
-              child: Text(
-                widget.name!,
-                style: TextStyle(
-                  color: Colors.indigo,
-                  fontSize: 24,
-                  fontWeight: FontWeight.w700,
+              child: FittedBox(
+                fit: BoxFit.scaleDown,
+                child: Text(
+                  widget.name!,
+                  style: TextStyle(
+                    color: Colors.indigo,
+                    fontSize: 24,
+                    fontWeight: FontWeight.w700,
+                  ),
                 ),
               ),
             ),

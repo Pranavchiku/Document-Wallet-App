@@ -1,3 +1,4 @@
+import 'package:document_wallet/widgets/bottomNavBar.dart';
 import 'package:flutter/material.dart';
 
 class viewDocument extends StatefulWidget {
@@ -64,6 +65,7 @@ class _viewDocumentState extends State<viewDocument> {
           ),
         ),
       ),
+      bottomNavigationBar: bottomNavBar(),
     );
   }
 }

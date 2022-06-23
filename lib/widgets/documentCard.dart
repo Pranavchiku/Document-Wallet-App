@@ -1,3 +1,4 @@
+import 'package:document_wallet/index.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_feather_icons/flutter_feather_icons.dart';
@@ -75,7 +76,10 @@ class _documentCardState extends State<documentCard> {
             IconButton(
               onPressed: () {
                 widget.ref!.delete();
-                setState(() {});
+                Navigator.pushAndRemoveUntil(
+                    context,
+                    MaterialPageRoute(builder: (context) => Index()),
+                    (route) => false);
               },
               icon: Icon(Icons.delete, color: Colors.black),
             ),
