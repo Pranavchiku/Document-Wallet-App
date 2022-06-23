@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "1040105723277",
+    "project_id": "document-wallet",
+    "storage_bucket": "document-wallet.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1040105723277:android:a6e27de04ce4236a2fd9c4",
+        "android_client_info": {
+          "package_name": "com.example.document_wallet"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1040105723277-7maju8nfdtbg9roonrqvt792pojs9fnr.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.document_wallet",
+            "certificate_hash": "aa14ecad6f1165d4010fcf02161f383e71e25c00"
+          }
+        },
+        {
+          "client_id": "1040105723277-7obp5hk1c24aam89307ohf6lklkhcd5b.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCMO7__AsaVYE6MZ0EgqwJU0Mv2Caj5U3M"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1040105723277-7obp5hk1c24aam89307ohf6lklkhcd5b.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
