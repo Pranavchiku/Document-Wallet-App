@@ -40,6 +40,11 @@ dependencies:
   google_sign_in: ^5.3.3
   flutter_svg: ^1.0.3
   mailer: ^5.1.1
+  file_picker: ^4.6.1
+  dotted_border: ^2.0.0+2
+  firebase_storage: ^10.2.18
+  fluttertoast: ^8.0.9
+  image_picker: ^0.8.5+3
 
 dev_dependencies:
   flutter_test:
