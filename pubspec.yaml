@@ -45,6 +45,7 @@ dependencies:
   firebase_storage: ^10.2.18
   fluttertoast: ^8.0.9
   image_picker: ^0.8.5+3
+  pinch_zoom: ^1.0.0
 
 dev_dependencies:
   flutter_test:

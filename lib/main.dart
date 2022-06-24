@@ -278,78 +278,122 @@ class _LandingPageState extends State<LandingPage> {
                 Expanded(child: Divider()),
               ]),
               // SizedBox(height: 30),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  GestureDetector(
-                    onTap: () {},
-                    child: Container(
-                      width: 50,
-                      height: 50,
-                      decoration: BoxDecoration(
-                        boxShadow: [
-                          BoxShadow(
-                            blurRadius: 20,
-                            color: Color.fromRGBO(0, 0, 0, 0.1),
-                          )
-                        ],
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                      child: Icon(
-                        Icons.apple,
-                        color: Colors.black,
-                      ),
-                    ),
-                  ),
-                  SizedBox(width: 20),
-                  GestureDetector(
-                    onTap: googleSignIn,
-                    child: Container(
-                      width: 50,
-                      height: 50,
-                      decoration: BoxDecoration(
-                        boxShadow: [
-                          BoxShadow(
-                            blurRadius: 20,
-                            color: Color.fromRGBO(0, 0, 0, 0.1),
-                          )
-                        ],
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                      // child: Icon(
-                      //   FeatherIcons.github,
-                      //   color: Colors.black,
-                      // ),
-                      child: SvgPicture.asset(
-                        'assets/google icon.svg',
-                        height: 10,
-                        width: 10,
-                      ),
-                    ),
-                  ),
-                  SizedBox(width: 20),
-                  Container(
-                    width: 50,
-                    height: 50,
+              GestureDetector(
+                onTap: googleSignIn,
+                child: Center(
+                  child: Container(
+                    height: 60,
+                    width: size.width / 2,
                     decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(20.0),
                       boxShadow: [
                         BoxShadow(
                           blurRadius: 20,
                           color: Color.fromRGBO(0, 0, 0, 0.1),
                         )
                       ],
-                      color: Colors.white,
-                      borderRadius: BorderRadius.circular(10),
                     ),
-                    child: Icon(
-                      Icons.facebook,
-                      color: Colors.blue,
+                    child: Container(
+                      padding: EdgeInsets.only(
+                        left: 10,
+                        right: 20,
+                      ),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          SvgPicture.asset(
+                            'assets/google icon.svg',
+                            height: 40,
+                            width: 40,
+                          ),
+                          SizedBox(width: 10),
+                          Text(
+                            "Google",
+                            style: TextStyle(
+                              color: Colors.indigo[700],
+                              fontSize: 22,
+                              fontWeight: FontWeight.w800,
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
                   ),
-                ],
+                ),
               ),
+              // Row(
+              //   mainAxisAlignment: MainAxisAlignment.center,
+              //   children: [
+              //     GestureDetector(
+              //       onTap: () {},
+              //       child: Container(
+              //         width: 50,
+              //         height: 50,
+              //         decoration: BoxDecoration(
+              //           boxShadow: [
+              //             BoxShadow(
+              //               blurRadius: 20,
+              //               color: Color.fromRGBO(0, 0, 0, 0.1),
+              //             )
+              //           ],
+              //           color: Colors.white,
+              //           borderRadius: BorderRadius.circular(10),
+              //         ),
+              //         child: Icon(
+              //           Icons.apple,
+              //           color: Colors.black,
+              //         ),
+              //       ),
+              //     ),
+              //     SizedBox(width: 20),
+              //     GestureDetector(
+              //       onTap: googleSignIn,
+              //       child: Container(
+              //         width: 50,
+              //         height: 50,
+              //         decoration: BoxDecoration(
+              //           boxShadow: [
+              //             BoxShadow(
+              //               blurRadius: 20,
+              //               color: Color.fromRGBO(0, 0, 0, 0.1),
+              //             )
+              //           ],
+              //           color: Colors.white,
+              //           borderRadius: BorderRadius.circular(10),
+              //         ),
+              //         // child: Icon(
+              //         //   FeatherIcons.github,
+              //         //   color: Colors.black,
+              //         // ),
+              //         child: SvgPicture.asset(
+              //           'assets/google icon.svg',
+              //           height: 10,
+              //           width: 10,
+              //         ),
+              //       ),
+              //     ),
+              //     SizedBox(width: 20),
+              //     Container(
+              //       width: 50,
+              //       height: 50,
+              //       decoration: BoxDecoration(
+              //         boxShadow: [
+              //           BoxShadow(
+              //             blurRadius: 20,
+              //             color: Color.fromRGBO(0, 0, 0, 0.1),
+              //           )
+              //         ],
+              //         color: Colors.white,
+              //         borderRadius: BorderRadius.circular(10),
+              //       ),
+              //       child: Icon(
+              //         Icons.facebook,
+              //         color: Colors.blue,
+              //       ),
+              //     ),
+              //   ],
+              // ),
               // SizedBox(height: 30),
               Row(
                 children: [

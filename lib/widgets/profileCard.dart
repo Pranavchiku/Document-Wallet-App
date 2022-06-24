@@ -63,8 +63,10 @@ class _profileCardState extends State<profileCard> {
             ),
             SizedBox(height: 20),
             Center(
-              child: FittedBox(
-                fit: BoxFit.scaleDown,
+              child: ConstrainedBox(
+                constraints: BoxConstraints(
+                  maxWidth: size.width - 40,
+                ),
                 child: Text(
                   widget.name!,
                   style: TextStyle(

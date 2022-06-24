@@ -44,7 +44,9 @@ class _AddFileState extends State<AddFile> {
     if (_formKey != null && _formKey.currentState!.validate()) {
       _formKey.currentState!.save();
       final picker = ImagePicker();
-      final pickedFile = await picker.getImage(source: ImageSource.gallery);
+      final pickedFile = await picker.getImage(
+        source: ImageSource.gallery,
+      );
       setState(() {
         _image = File(pickedFile!.path);
       });

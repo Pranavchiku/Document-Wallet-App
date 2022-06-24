@@ -1,5 +1,6 @@
 import 'package:document_wallet/widgets/bottomNavBar.dart';
 import 'package:flutter/material.dart';
+import 'package:pinch_zoom/pinch_zoom.dart';
 
 class viewDocument extends StatefulWidget {
   String? documentUrl;
@@ -26,6 +27,7 @@ class _viewDocumentState extends State<viewDocument> {
           ),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
                 "Document: " + widget.documentName!,
@@ -39,24 +41,33 @@ class _viewDocumentState extends State<viewDocument> {
               ),
               Center(
                 child: Container(
-                  height: size.height * .8,
+                  // height: size.height * .8,
                   child: ClipRect(
-                    child: Image.network(
-                      widget.documentUrl!,
-                      fit: BoxFit.cover,
-                      frameBuilder:
-                          (context, child, frame, wasSynchronouslyLoaded) {
-                        return child;
-                      },
-                      loadingBuilder: (context, child, loadingProgress) {
-                        if (loadingProgress == null) {
+                    child: InteractiveViewer(
+                      panEnabled: false,
+                      minScale: 0.5,
+                      maxScale: 4.0,
+                      boundaryMargin: EdgeInsets.all(10),
+                      child: Image.network(
+                        widget.documentUrl!,
+                        fit: BoxFit.cover,
+                        frameBuilder:
+                            (context, child, frame, wasSynchronouslyLoaded) {
                           return child;
-                        } else {
-                          return Center(
-                            child: CircularProgressIndicator(),
-                          );
-                        }
-                      },
+                        },
+                        loadingBuilder: (context, child, loadingProgress) {
+                          if (loadingProgress == null) {
+                            return child;
+                          } else {
+                            return Container(
+                              height: size.height * 0.8,
+                              child: Center(
+                                child: CircularProgressIndicator(),
+                              ),
+                            );
+                          }
+                        },
+                      ),
                     ),
                   ),
                 ),

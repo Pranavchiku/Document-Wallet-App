@@ -57,12 +57,19 @@ class _documentCardState extends State<documentCard> {
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Text(
-                  widget.documentName!,
-                  style: TextStyle(
-                    fontSize: 20,
-                    fontWeight: FontWeight.w600,
-                    color: Colors.black,
+                ConstrainedBox(
+                  constraints: BoxConstraints(
+                    maxWidth: 200,
+                    minWidth: 100,
+                    maxHeight: 50,
+                  ),
+                  child: Text(
+                    widget.documentName!,
+                    style: TextStyle(
+                      fontSize: 20,
+                      fontWeight: FontWeight.w600,
+                      color: Colors.black,
+                    ),
                   ),
                 ),
                 // SizedBox(height: 5),
